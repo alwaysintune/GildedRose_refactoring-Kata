@@ -18,6 +18,8 @@ namespace csharp.ConsoleApp
                 if (item.Name == "Sulfuras, Hand of Ragnaros")
                     continue;
 
+                item.SellIn -= 1;
+
                 /*
                  * Has shared logic between other items - a place for abstraction
                  * Also, does not conform to requirements: when sell by date passes,
@@ -30,8 +32,6 @@ namespace csharp.ConsoleApp
                         item.Quality += 1;
                     }
 
-                    item.SellIn -= 1;
-
                     if (item.SellIn < 0)
                     {
                         if (item.Quality < 50)
@@ -43,13 +43,15 @@ namespace csharp.ConsoleApp
                     continue;
                 }
 
+                /* SellIn value only partially affects Backstage passes before being decreased
+                 */
                 if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
                     if (item.Quality < 50)
                     {
                         item.Quality += 1;
 
-                        if (item.SellIn < 11)
+                        if (item.SellIn < 10)
                         {
                             if (item.Quality < 50)
                             {
@@ -57,7 +59,7 @@ namespace csharp.ConsoleApp
                             }
                         }
 
-                        if (item.SellIn < 6)
+                        if (item.SellIn < 5)
                         {
                             if (item.Quality < 50)
                             {
@@ -65,8 +67,6 @@ namespace csharp.ConsoleApp
                             }
                         }
                     }
-
-                    item.SellIn -= 1;
 
                     if (item.SellIn < 0)
                     {
@@ -81,8 +81,6 @@ namespace csharp.ConsoleApp
                 {
                     item.Quality -= 1;
                 }
-
-                item.SellIn -= 1;
 
                 if (item.SellIn < 0)
                 {
