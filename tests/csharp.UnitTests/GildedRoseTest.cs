@@ -44,8 +44,8 @@ namespace csharp.UnitTests
         }
 
         [TestCase(1, ExpectedResult = 3)]
-        [TestCase(0, ExpectedResult = 4, Reason = "unknown at the moment")]
-        [TestCase(-1, ExpectedResult = 4, Reason = "unknown at the moment")]
+        [TestCase(0, ExpectedResult = 4, Reason = "reverse of degradation when sell by date passes")]
+        [TestCase(-1, ExpectedResult = 4, Reason = "reverse of degradation when sell by date passes")]
         public int UpdateQuality_ShouldIncreaseQuality_WhenAgedBrieSellInDecreases(int sellIn)
         {
             var item = ItemAfterOneDay("Aged Brie", sellIn, quality: 2);
