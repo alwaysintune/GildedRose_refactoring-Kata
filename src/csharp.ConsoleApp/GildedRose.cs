@@ -27,12 +27,7 @@ namespace csharp.ConsoleApp
                  */
                 if (item.Name == "Aged Brie")
                 {
-                    item.Quality = System.Math.Min(50, item.Quality + 1);
-
-                    if (item.SellIn < 0)
-                    {
-                        item.Quality = System.Math.Min(50, item.Quality + 1);
-                    }
+                    item.Quality = System.Math.Min(50, item.Quality + 1 * (item.SellIn < 0 ? 2 : 1));
 
                     continue;
                 }
@@ -41,19 +36,19 @@ namespace csharp.ConsoleApp
                  */
                 if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    item.Quality = System.Math.Min(50, item.Quality + 1);
-
-                    if (item.SellIn < 10)
+                    if (item.SellIn >= 10)
                     {
                         item.Quality = System.Math.Min(50, item.Quality + 1);
                     }
-
-                    if (item.SellIn < 5)
+                    else if (item.SellIn >= 5)
                     {
-                        item.Quality = System.Math.Min(50, item.Quality + 1);
+                        item.Quality = System.Math.Min(50, item.Quality + 2);
                     }
-
-                    if (item.SellIn < 0)
+                    else if (item.SellIn >= 0)
+                    {
+                        item.Quality = System.Math.Min(50, item.Quality + 3);
+                    }
+                    else
                     {
                         item.Quality = 0;
                     }
@@ -62,12 +57,8 @@ namespace csharp.ConsoleApp
                 }
 
 
-                item.Quality = System.Math.Max(0, item.Quality - 1);
-
-                if (item.SellIn < 0)
-                {
-                    item.Quality = System.Math.Max(0, item.Quality - 1);
-                }
+                // Shares common logic with "Aged Brie"; only difference in sign
+                item.Quality = System.Math.Max(0, item.Quality - 1 * (item.SellIn < 0 ? 2 : 1));
             }
         }
     }
