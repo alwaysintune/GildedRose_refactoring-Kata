@@ -14,14 +14,15 @@ namespace csharp.ConsoleApp
         {
             foreach (var item in Items)
             {
+                // Does not degrade, neither has SellIn value modified
+                if (item.Name == "Sulfuras, Hand of Ragnaros")
+                    continue;
+
                 if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
                     if (item.Quality > 0)
                     {
-                        if (item.Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            item.Quality -= 1;
-                        }
+                        item.Quality -= 1;
                     }
                 }
                 else
@@ -51,10 +52,7 @@ namespace csharp.ConsoleApp
                     }
                 }
 
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    item.SellIn -= 1;
-                }
+                item.SellIn -= 1;
 
                 if (item.SellIn < 0)
                 {
@@ -64,10 +62,7 @@ namespace csharp.ConsoleApp
                         {
                             if (item.Quality > 0)
                             {
-                                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    item.Quality -= 1;
-                                }
+                                item.Quality -= 1;
                             }
                         }
                         else
