@@ -27,17 +27,11 @@ namespace csharp.ConsoleApp
                  */
                 if (item.Name == "Aged Brie")
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality += 1;
-                    }
+                    item.Quality = System.Math.Min(50, item.Quality + 1);
 
                     if (item.SellIn < 0)
                     {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality += 1;
-                        }
+                        item.Quality = System.Math.Min(50, item.Quality + 1);
                     }
 
                     continue;
@@ -47,25 +41,16 @@ namespace csharp.ConsoleApp
                  */
                 if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Quality < 50)
+                    item.Quality = System.Math.Min(50, item.Quality + 1);
+
+                    if (item.SellIn < 10)
                     {
-                        item.Quality += 1;
+                        item.Quality = System.Math.Min(50, item.Quality + 1);
+                    }
 
-                        if (item.SellIn < 10)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality += 1;
-                            }
-                        }
-
-                        if (item.SellIn < 5)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality += 1;
-                            }
-                        }
+                    if (item.SellIn < 5)
+                    {
+                        item.Quality = System.Math.Min(50, item.Quality + 1);
                     }
 
                     if (item.SellIn < 0)
@@ -77,17 +62,11 @@ namespace csharp.ConsoleApp
                 }
 
 
-                if (item.Quality > 0)
-                {
-                    item.Quality -= 1;
-                }
+                item.Quality = System.Math.Max(0, item.Quality - 1);
 
                 if (item.SellIn < 0)
                 {
-                    if (item.Quality > 0)
-                    {
-                        item.Quality -= 1;
-                    }
+                    item.Quality = System.Math.Max(0, item.Quality - 1);
                 }
             }
         }
