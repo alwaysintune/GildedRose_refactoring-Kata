@@ -38,20 +38,22 @@ namespace csharp.ConsoleApp
                 {
                     if (item.SellIn >= 10)
                     {
-                        item.Quality = System.Math.Min(50, item.Quality + 1);
+                        item.Quality += 1;
                     }
                     else if (item.SellIn >= 5)
                     {
-                        item.Quality = System.Math.Min(50, item.Quality + 2);
+                        item.Quality += 2;
                     }
                     else if (item.SellIn >= 0)
                     {
-                        item.Quality = System.Math.Min(50, item.Quality + 3);
+                        item.Quality += 3;
                     }
                     else
                     {
                         item.Quality = 0;
                     }
+
+                    item.Quality = System.Math.Min(50, item.Quality);
 
                     continue;
                 }
