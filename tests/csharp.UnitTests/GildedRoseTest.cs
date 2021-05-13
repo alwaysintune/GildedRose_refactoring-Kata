@@ -98,6 +98,21 @@ namespace csharp.UnitTests
             return item.Quality;
         }
 
+        [Test]
+        public void UpdateQuality_ShouldDecreaseConjuredQualityValueByTwo_WhenDayEnds()
+        {
+            var item = ItemAfterOneDay("Conjured any", sellIn: 2, quality: 2);
+            Assert.AreEqual(0, item.Quality);
+        }
+
+        [TestCase(0, ExpectedResult = 0)]
+        [TestCase(-1, ExpectedResult = 0)]
+        public int UpdateQuality_ShouldDegradeConjuredQualityFourTimesAsFast__WhenSellByDatePasses(int sellIn)
+        {
+            var item = ItemAfterOneDay("Conjured any", sellIn, quality: 4);
+            return item.Quality;
+        }
+
         private Item ItemAfterOneDay(string itemName, int sellIn, int quality)
         {
             IList<Item> items = new List<Item>

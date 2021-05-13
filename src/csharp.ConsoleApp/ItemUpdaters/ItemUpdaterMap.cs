@@ -15,6 +15,7 @@ namespace csharp.ConsoleApp.ItemUpdaters
             ItemUpdaters.Add<AgedBrieUpdater>();
             ItemUpdaters.Add<SulfurasUpdater>();
             ItemUpdaters.Add<BackstagePassesUpdater>();
+            ItemUpdaters.Add<ConjuredUpdater>();
             ItemUpdaters.Add<StandardUpdater>();
         }
 
