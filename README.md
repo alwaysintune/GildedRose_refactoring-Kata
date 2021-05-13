@@ -36,6 +36,8 @@ cd csharp
 git init
 git add --all
 git commit
+```
+```
 git remote add origin https://github.com/{username}/GildedRose_refactoring-Kata.git
 git push -u origin main
 ```
