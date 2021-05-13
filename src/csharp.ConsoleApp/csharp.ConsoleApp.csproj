@@ -48,6 +48,7 @@
     <Compile Include="ItemUpdaters\AgedBrieUpdater.cs" />
     <Compile Include="ItemUpdaters\BackstagePassesUpdater.cs" />
     <Compile Include="ItemUpdaters\ItemUpdater.cs" />
+    <Compile Include="ItemUpdaters\StandardUpdater.cs" />
     <Compile Include="ItemUpdaters\SulfurasUpdater.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
