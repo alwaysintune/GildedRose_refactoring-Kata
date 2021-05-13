@@ -20,6 +20,12 @@ ownership.
 Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
 legendary item and as such its Quality is 80 and it never alters.
 
+## Few things to note
+
+- There was a hidden Aged Brie functionality, which is not documented in requirements: when sell by date has passed, "Aged Brie" Quality increases twice as fast (reverse of standard item).
+
+- Initial ["ApprovalTest.ThirtyDays.approved.txt"](https://github.com/alwaysintune/GildedRose_refactoring-Kata/blob/main/tests/csharp.UnitTests/ApprovalTest.ThirtyDays.approved.outdated.txt) had to be updated, since it was intended for refactoring (not with the new functionality in mind).
+
 ## Steps to reproduce
 
 ```
