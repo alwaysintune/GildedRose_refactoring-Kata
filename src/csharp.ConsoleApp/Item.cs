@@ -1,4 +1,4 @@
-﻿namespace csharp
+﻿namespace csharp.ConsoleApp
 {
     public class Item
     {

@@ -3,9 +3,10 @@ using System.IO;
 using System.Text;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using csharp.ConsoleApp;
 using NUnit.Framework;
 
-namespace csharp
+namespace csharp.UnitTests
 {
     [UseReporter(typeof(DiffReporter))]
     [TestFixture]
