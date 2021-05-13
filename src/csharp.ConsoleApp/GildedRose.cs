@@ -43,6 +43,39 @@ namespace csharp.ConsoleApp
                     continue;
                 }
 
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                {
+                    if (item.Quality < 50)
+                    {
+                        item.Quality += 1;
+
+                        if (item.SellIn < 11)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality += 1;
+                            }
+                        }
+
+                        if (item.SellIn < 6)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality += 1;
+                            }
+                        }
+                    }
+
+                    item.SellIn -= 1;
+
+                    if (item.SellIn < 0)
+                    {
+                        item.Quality = 0;
+                    }
+
+                    continue;
+                }
+
 
                 if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
@@ -56,25 +89,6 @@ namespace csharp.ConsoleApp
                     if (item.Quality < 50)
                     {
                         item.Quality += 1;
-
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-                        }
                     }
                 }
 
