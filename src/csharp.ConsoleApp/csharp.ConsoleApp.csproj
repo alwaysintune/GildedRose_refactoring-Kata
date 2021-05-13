@@ -46,6 +46,7 @@
     <Compile Include="GildedRose.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemUpdaters\AgedBrieUpdater.cs" />
+    <Compile Include="ItemUpdaters\BackstagePassesUpdater.cs" />
     <Compile Include="ItemUpdaters\ItemUpdater.cs" />
     <Compile Include="ItemUpdaters\SulfurasUpdater.cs" />
     <Compile Include="Program.cs" />
