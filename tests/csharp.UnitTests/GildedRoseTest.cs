@@ -1,30 +1,41 @@
 ﻿using csharp.ConsoleApp;
+using csharp.ConsoleApp.ItemUpdaters;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace csharp.UnitTests
 {
     [TestFixture]
     public class GildedRoseTest
     {
+        public ItemUpdaterMap ItemUpdateMap { get; private set; }
+
+        [OneTimeSetUp]
+        public void Init()
+        {
+            ItemUpdateMap = new ItemUpdaterMap();
+        }
+
         [Test]
         public void Foo()
         {
-            var item = ItemAfterOneDay("foo", sellIn: 0, quality: 0);
+            var item = ArrangeItem("foo", sellIn: 0, quality: 0);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual("foo", item.Name);
         }
 
         [Test]
         public void UpdateQuality_ShouldDecreaseSellInValue_WhenDayEnds()
         {
-            var item = ItemAfterOneDay("_test", sellIn: 2, quality: 2);
+            var item = ArrangeItem("_test", sellIn: 2, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(1, item.SellIn);
         }
 
         [Test]
         public void UpdateQuality_ShouldDecreaseQualityValue_WhenDayEnds()
         {
-            var item = ItemAfterOneDay("_test", sellIn: 2, quality: 2);
+            var item = ArrangeItem("_test", sellIn: 2, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(1, item.Quality);
         }
 
@@ -32,14 +43,16 @@ namespace csharp.UnitTests
         [TestCase(-1, ExpectedResult = 0)]
         public int UpdateQuality_ShouldDegradeQualityTwiceAsFast_WhenSellByDatePasses(int sellIn)
         {
-            var item = ItemAfterOneDay("_test", sellIn, quality: 2);
+            var item = ArrangeItem("_test", sellIn, quality: 2);
+            item = ItemAfterOneDay(item);
             return item.Quality;
         }
 
         [Test]
         public void UpdateQuality_ShouldNotBeNegative_WhenQualityIsZero()
         {
-            var item = ItemAfterOneDay("_test", sellIn: 2, quality: 0);
+            var item = ArrangeItem("_test", sellIn: 2, quality: 0);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(0, item.Quality);
         }
 
@@ -48,7 +61,8 @@ namespace csharp.UnitTests
         [TestCase(-1, ExpectedResult = 4, Reason = "reverse of degradation when sell by date passes")]
         public int UpdateQuality_ShouldIncreaseQuality_WhenAgedBrieSellInDecreases(int sellIn)
         {
-            var item = ItemAfterOneDay("Aged Brie", sellIn, quality: 2);
+            var item = ArrangeItem("Aged Brie", sellIn, quality: 2);
+            item = ItemAfterOneDay(item);
             return item.Quality;
         }
 
@@ -58,35 +72,40 @@ namespace csharp.UnitTests
         [TestCase("Backstage passes to a TAFKAL80ETC concert", 50, ExpectedResult = 50)]
         public int UpdateQuality_ShouldNotIncreaseQuality_WhenQualityLimitReached(string itemName, int quality)
         {
-            var item = ItemAfterOneDay(itemName, sellIn: 2, quality);
+            var item = ArrangeItem(itemName, sellIn: 2, quality);
+            item = ItemAfterOneDay(item);
             return item.Quality;
         }
 
         [Test(Description = "\"Sulfuras\" quality is always 80")]
         public void UpdateQuality_ShouldNotDecreaseQuality_WhenItemIsSulfuras()
         {
-            var item = ItemAfterOneDay("Sulfuras, Hand of Ragnaros", sellIn: 2, quality: 80);
+            var item = ArrangeItem("Sulfuras, Hand of Ragnaros", sellIn: 2, quality: 80);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(80, item.Quality);
         }
 
         [Test]
         public void UpdateQuality_ShouldIncreaseQualityByOne_WhenBackstagePassesSellInDateIsAboveTen()
         {
-            var item = ItemAfterOneDay("Backstage passes to a TAFKAL80ETC concert", sellIn: 11, quality: 2);
+            var item = ArrangeItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 11, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(item.Quality, 3);
         }
 
         [Test]
         public void UpdateQuality_ShouldIncreaseQualityByTwo_WhenBackstagePassesSellInDateIsAboveFive([Range(6, 10)] int sellIn)
         {
-            var item = ItemAfterOneDay("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 2);
+            var item = ArrangeItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(item.Quality, 4);
         }
 
         [Test]
         public void UpdateQuality_ShouldIncreaseQualityByThree_WhenBackstagePassesSellInDateIsAboveZero([Range(1, 5)] int sellIn)
         {
-            var item = ItemAfterOneDay("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 2);
+            var item = ArrangeItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(item.Quality, 5);
         }
 
@@ -94,14 +113,16 @@ namespace csharp.UnitTests
         [TestCase(-1, ExpectedResult = 0)]
         public int UpdateQuality_ShouldSetQualityToZero_WhenBackstagePassesSellByDatePasses(int sellIn)
         {
-            var item = ItemAfterOneDay("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 6);
+            var item = ArrangeItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality: 6);
+            item = ItemAfterOneDay(item);
             return item.Quality;
         }
 
         [Test]
         public void UpdateQuality_ShouldDecreaseConjuredQualityValueByTwo_WhenDayEnds()
         {
-            var item = ItemAfterOneDay("Conjured any", sellIn: 2, quality: 2);
+            var item = ArrangeItem("Conjured any", sellIn: 2, quality: 2);
+            item = ItemAfterOneDay(item);
             Assert.AreEqual(0, item.Quality);
         }
 
@@ -109,25 +130,27 @@ namespace csharp.UnitTests
         [TestCase(-1, ExpectedResult = 0)]
         public int UpdateQuality_ShouldDegradeConjuredQualityFourTimesAsFast__WhenSellByDatePasses(int sellIn)
         {
-            var item = ItemAfterOneDay("Conjured any", sellIn, quality: 4);
+            var item = ArrangeItem("Conjured any", sellIn, quality: 4);
+            item = ItemAfterOneDay(item);
             return item.Quality;
         }
 
-        private Item ItemAfterOneDay(string itemName, int sellIn, int quality)
+        private Item ArrangeItem(string itemName, int sellIn, int quality)
         {
-            IList<Item> items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = itemName,
-                    SellIn = sellIn,
-                    Quality = quality
-                }
+                Name = itemName,
+                SellIn = sellIn,
+                Quality = quality
             };
 
-            var app = new GildedRose(items);
-            app.UpdateQuality();
-            return items[0];
+            return item;
+        }
+
+        private Item ItemAfterOneDay(Item item)
+        {
+            ItemUpdateMap.GetInstance(item).UpdateQuality(item);
+            return item;
         }
     }
 }
