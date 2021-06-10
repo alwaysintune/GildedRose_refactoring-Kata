@@ -6,11 +6,11 @@ namespace csharp.ConsoleApp.ItemUpdaters
 {
     public class ItemUpdaterMap
     {
-        protected readonly Dictionary<string, ItemUpdater> ItemUpdaters;
+        protected readonly Dictionary<string, IItemUpdater> ItemUpdaters;
 
         public ItemUpdaterMap()
         {
-            ItemUpdaters = new Dictionary<string, ItemUpdater>();
+            ItemUpdaters = new Dictionary<string, IItemUpdater>();
             Add<AgedBrieUpdater>();
             Add<SulfurasUpdater>();
             Add<BackstagePassesUpdater>();
@@ -18,13 +18,13 @@ namespace csharp.ConsoleApp.ItemUpdaters
             Add<StandardUpdater>();
         }
 
-        public virtual void Add<T>() where T : ItemUpdater, new()
+        public virtual void Add<T>() where T : IItemUpdater, new()
         {
             T itemUpdater = new T();
             ItemUpdaters.Add(itemUpdater.RegexPattern, itemUpdater);
         }
 
-        public virtual ItemUpdater GetInstance(Item item)
+        public virtual IItemUpdater GetInstance(Item item)
         {
             var itemUpdater = ItemUpdaters
                 .Select(x => x.Value)

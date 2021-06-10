@@ -2,20 +2,24 @@
 
 namespace csharp.ConsoleApp.ItemUpdaters
 {
-    public class AgedBrieUpdater : ItemUpdater
+    public class AgedBrieUpdater : ItemUpdaterBase, IItemUpdater
     {
         public AgedBrieUpdater()
-            : base(qualityChange: 1)
+            : base(qualityChange: 1, regexPattern: @"Aged Brie")
         {
-            RegexPattern = @"Aged Brie";
         }
 
-        public override void UpdateQuality(Item item)
+        public void UpdateQuality(Item item)
         {
-            base.UpdateQuality(item);
+            UpdateSellIn(item);
 
             item.Quality = Math.Min(50,
                 item.Quality + QualityChange * (item.SellIn < 0 ? 2 : 1));
+        }
+
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn -= 1;
         }
     }
 }

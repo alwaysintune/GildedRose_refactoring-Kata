@@ -48,7 +48,8 @@
     <Compile Include="ItemUpdaters\AgedBrieUpdater.cs" />
     <Compile Include="ItemUpdaters\BackstagePassesUpdater.cs" />
     <Compile Include="ItemUpdaters\ConjuredUpdater.cs" />
-    <Compile Include="ItemUpdaters\ItemUpdater.cs" />
+    <Compile Include="ItemUpdaters\IItemUpdater.cs" />
+    <Compile Include="ItemUpdaters\ItemUpdaterBase.cs" />
     <Compile Include="ItemUpdaters\ItemUpdaterMap.cs" />
     <Compile Include="ItemUpdaters\StandardUpdater.cs" />
     <Compile Include="ItemUpdaters\SulfurasUpdater.cs" />

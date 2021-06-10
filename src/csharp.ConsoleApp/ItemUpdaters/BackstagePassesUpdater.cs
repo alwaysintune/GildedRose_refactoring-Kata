@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace csharp.ConsoleApp.ItemUpdaters
 {
-    public class BackstagePassesUpdater : ItemUpdater
+    public class BackstagePassesUpdater : ItemUpdaterBase, IItemUpdater
     {
         public BackstagePassesUpdater()
-            : base(qualityChange: 0)
+            : base(qualityChange: 0, regexPattern: @"Backstage passes.*")
         {
-            RegexPattern = @"Backstage passes.*";
         }
 
-        public override void UpdateQuality(Item item)
+        public void UpdateQuality(Item item)
         {
-            base.UpdateQuality(item);
+            UpdateSellIn(item);
 
             if (item.SellIn >= 10)
                 item.Quality += 1;
@@ -28,6 +23,11 @@ namespace csharp.ConsoleApp.ItemUpdaters
                 item.Quality = 0;
 
             item.Quality = Math.Min(50, item.Quality);
+        }
+
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn -= 1;
         }
     }
 }
