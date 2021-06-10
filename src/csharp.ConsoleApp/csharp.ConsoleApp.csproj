@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ItemUpdaterDictionaryExtension.cs" />
     <Compile Include="GildedRose.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemUpdaters\AgedBrieUpdater.cs" />

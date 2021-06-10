@@ -1,5 +1,4 @@
-﻿using csharp.ConsoleApp.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -12,16 +11,17 @@ namespace csharp.ConsoleApp.ItemUpdaters
         public ItemUpdaterMap()
         {
             ItemUpdaters = new Dictionary<string, ItemUpdater>();
-            ItemUpdaters.Add<AgedBrieUpdater>();
-            ItemUpdaters.Add<SulfurasUpdater>();
-            ItemUpdaters.Add<BackstagePassesUpdater>();
-            ItemUpdaters.Add<ConjuredUpdater>();
-            ItemUpdaters.Add<StandardUpdater>();
+            Add<AgedBrieUpdater>();
+            Add<SulfurasUpdater>();
+            Add<BackstagePassesUpdater>();
+            Add<ConjuredUpdater>();
+            Add<StandardUpdater>();
         }
 
         public virtual void Add<T>() where T : ItemUpdater, new()
         {
-            ItemUpdaters.Add<T>();
+            T itemUpdater = new T();
+            ItemUpdaters.Add(itemUpdater.RegexPattern, itemUpdater);
         }
 
         public virtual ItemUpdater GetInstance(Item item)
